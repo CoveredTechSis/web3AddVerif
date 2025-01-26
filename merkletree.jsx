@@ -9,14 +9,14 @@ const addresses = [
 "0xB5fce5b5452a71a6724db2839693A5e1623E7fc1",
 "0x82E6b1F92D530576bF6Ff5bf9D8D1F1BBC5903b6",
 "0xb6Bd4C102049b57bC577Dd9701eC5E1038B38DA3"
-]
+];
 const hashAddresses = addresses.map(addr => SHA256(addr).toString());
-const mekleTree = new MerkleTree(hashAddresses, SHA256);
-const mekleRoot = mekleTree.getRoot().toString('hex');
-console.log("Merkle Root:", mekleRoot);
+const merkleTree = new MerkleTree(hashAddresses, SHA256);
+const merkleRoot = merkleTree.getRoot().toString('hex');
+console.log("Merkle Root:", merkleRoot);
 const leaf = SHA256("0x60256F6304142eDd8e2793C3f0335EE6375a1c86").toString();
-const proof = tree.getProof(leaf).map(x => x.data.toString('hex'));
+const proof = merkleTree.getProof(leaf).map(x => x.data.toString('hex'));
 console.log("Proof:", proof)
-const isValid = tree.verify(proof, leaf, mekleRoot);
+const isValid = MerkleTree.verify(proof, leaf, merkleRoot);
 console.log("Verification for this address is:", isValid);
 
